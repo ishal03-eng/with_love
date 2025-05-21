@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Palak, With Love</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #333;
+      overflow-x: hidden;
+    }
+    .section {
+      padding: 40px 0;
+      min-height: 80vh;
+    }
+    .navbar {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar-brand {
+      font-size: 1.2rem;
+    }
+    .nav-link {
+      font-size: 0.9rem;
+    }
+    .landing {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .landing h1 {
+      font-size: 2.5rem;
+      color: #fff;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    @media (max-width: 576px) {
+      .landing h1 {
+        font-size: 1.8rem;
+      }
+    }
+    .typewriter p {
+      overflow: hidden;
+      border-right: .15em solid #ff6b6b;
+      white-space: nowrap;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      animation: typing 2.5s steps(40, end), blink-caret .75s step-end infinite;
+    }
+    @media (max-width: 576px) {
+      .typewriter p {
+        font-size: 1rem;
+        animation: typing 2s steps(40, end);
+      }
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #ff6b6b }
+    }
+    .floating-heart {
+      position: absolute;
+      font-size: 1.5rem;
+      color: #ff6b6b;
+      animation: float 5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(80vh); opacity: 0.6; }
+      100% { transform: translateY(-80vh); opacity: 0; }
+    }
+    .card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-bottom: 15px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .gallery-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    .gallery-img:hover {
+      transform: scale(1.05);
+    }
+    .card-img-container {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* Specific styles for eyes.jpeg */
+    .eyes-img {
+      filter: brightness(1.2) contrast(1.1);
+      border: 2px solid #ff6b6b;
+      box-shadow: 0 0 8px rgba(255, 107, 107, 0.5);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 8px rgba(255, 107, 107, 0.5); }
+      to { box-shadow: 0 0 12px rgba(255, 107, 107, 0.8); }
+    }
+    .timeline .card {
+      position: relative;
+      margin-bottom: 15px;
+    }
+    .timeline .card::before {
+      content: '🌟';
+      position: absolute;
+      left: -30px;
+      top: 10px;
+      font-size: 1.2rem;
+    }
+    @media (max-width: 576px) {
+      .timeline .card::before {
+        left: -20px;
+        font-size: 1rem;
+      }
+      .gallery-img, .card-img-container {
+        height: 150px;
+      }
+      .eyes-img {
+        border: 1px solid #ff6b6b;
+        box-shadow: 0 0 6px rgba(255, 107, 107, 0.5);
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+      @keyframes glow {
+        from { box-shadow: 0 0 6px rgba(255, 107, 107, 0.5); }
+        to { box-shadow: 0 0 10px rgba(255, 107, 107, 0.8); }
+      }
+    }
+    .parallax {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    @media (max-width: 576px) {
+      .parallax {
+        background-attachment: scroll; /* Fallback for mobile */
+      }
+    }
+    #hidden-message {
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+    #hidden-message.show {
+      opacity: 1;
+    }
+    .music-control {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 1000;
+    }
+    .music-control .btn {
+      font-size: 0.9rem;
+      padding: 8px 12px;
+    }
+    .btn {
+      font-size: 1rem;
+      padding: 10px 20px;
+      touch-action: manipulation;
+    }
+    #love-letter {
+      white-space: pre-wrap;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+    @media (max-width: 576px) {
+      #love-letter {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#home">For Palak 💖</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#why-i-love-you">Why I Love You</a></li>
+          <li class="nav-item"><a class="nav-link" href="#what-youve-said">Your Words</a></li>
+          <li class="nav-item"><a class="nav-link" href="#youre-beautiful">You're Beautiful</a></li>
+          <li class="nav-item"><a class="nav-link" href="#our-story">Our Story</a></li>
+          <li class="nav-item"><a class="nav-link" href="#letter">Letter</a></li>
+          <li class="nav-item"><a class="nav-link" href="#surprise">Surprise</a></li>
+          <li class="nav-item"><a class="nav-link" href="#countdown">Countdown</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Landing Page -->
+  <section id="home" class="section landing parallax" style="background-image: url('./images/main.jpeg')">
+    <h1>To Palak, My Sunshine 🌻</h1>
+    <div class="typewriter">
+      <p>236 km apart, yet you're always in my heart…</p>
+    </div>
+    <button class="btn btn-light mt-3" onclick="scrollToSection('why-i-love-you')">Enter My Heart</button>
+    <div class="floating-heart" style="left: 20%; animation-delay: 0s;">💖</div>
+    <div class="floating-heart" style="left: 80%; animation-delay: 2s;">💖</div>
+  </section>
+
+  <!-- Why I Love You -->
+  <section id="why-i-love-you" class="section">
+    <div class="container">
+      <h2 class="text-center mb-4">Why I Love You 💕</h2>
+      <div class="row" id="compliment-cards">
+        <div class="col-12 col-md-4 mb-3">
+          <div class="card text-center p-3">
+            <div class="card-body">
+              <h5 class="card-title">Your Heart</h5>
+              <p class="card-text">Your messages light up my phone and my heart.</p>
+              <button class="btn btn-outline-danger heart-btn">❤️</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mb-3">
+          <div class="card text-center p-3">
+            <div class="card-body">
+              <h5 class="card-title">Your Voice</h5>
+              <p class="card-text">Our video calls make 236 km feel like nothing.</p>
+              <button class="btn btn-outline-danger heart-btn">❤️</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mb-3">
+          <div class="card text-center p-3">
+            <div class="card-body">
+              <h5 class="card-title">Your Humor</h5>
+              <p class="card-text">Your memes make me laugh every day.</p>
+              <button class="btn btn-outline-danger heart-btn">❤️</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What You’ve Said -->
+  <section id="what-youve-said" class="section parallax" style="background-image: url('https://images.unsplash.com/photo-1512436991641-0b04e2b6f74b')">
+    <div class="container">
+      <h2 class="text-center mb-4">Your Words (I Save Every Chat) 🎧</h2>
+      <div id="quote-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="text-center">
+              <div class="typewriter">
+                <p>"Your voice messages feel like hugs from 236 km away."</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="text-center">
+              <div class="typewriter">
+                <p>"Every chat with you is my favorite part of the day."</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="text-center">
+              <div class="typewriter">
+                <p>"You make me smile, even through a screen."</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#quote-carousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#quote-carousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- You're Beautiful -->
+  <section id="youre-beautiful" class="section">
+    <div class="container">
+      <h2 class="text-center mb-4">You're Beautiful 🌹</h2>
+      <div class="row">
+        <div class="col-12 col-md-4 mb-3">
+          <div class="card">
+            <div class="card-img-container">
+              <img src="./images/eyes.jpeg" class="gallery-img eyes-img" alt="Your Eyes">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Your Eyes</h5>
+              <p class="card-text">They shine through every selfie you send.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mb-3">
+          <div class="card">
+            <div class="card-img-container">
+              <img src="./images/smile.jpeg" class="gallery-img" alt="Your Smile">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Your Smile</h5>
+              <p class="card-text">It lights up my screen.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mb-3">
+          <div class="card">
+            <div class="card-img-container">
+              <img src="./images/soul.jpeg" class="gallery-img" alt="Your Soul">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Your Soul</h5>
+              <p class="card-text">It connects with mine, no matter the distance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section id="our-story" class="section parallax" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e')">
+    <div class="container">
+      <h2 class="text-center mb-4">Our Story 📜</h2>
+      <div class="timeline">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">March 14, 2025: Our First Chat 🌟</h5>
+            <p class="card-text">236 km apart, we connected online, and my world changed.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">First Video Call 📹</h5>
+            <p class="card-text">Your smile on my screen felt closer than 236 km.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Our Late-Night Chats 😴</h5>
+            <p class="card-text">Hours of texting, laughing, and sharing dreams.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Favorite Emoji 😄</h5>
+            <p class="card-text">You spam 💖, and I can’t stop smiling.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A Letter to You -->
+  <section id="letter" class="section">
+    <div class="container">
+      <h2 class="text-center mb-4">A Letter to You 💌</h2>
+      <div class="typewriter text-center">
+        <p id="love-letter">Dear Palak, <br>
+          236 km can’t dim the love I feel. Your texts spark joy, your voice soothes my soul, and your laughter over video calls lights up my world. Every emoji you send, every late-night chat, weaves our hearts closer. Since March 14, 2025, you’ve been my everything—my confidant, my joy, my dream. Your strength inspires me, your kindness humbles me, and your love completes me. Across the distance, you’re my best friend, my peace, my person. I cherish every moment and dream of the day we’ll close the 236 km gap.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Surprise Element -->
+  <section id="surprise" class="section">
+    <div class="container text-center">
+      <h2 class="mb-4">A Surprise for You 🌟</h2>
+      <button class="btn btn-danger mb-3" onclick="revealSurprise()">Tap for a Surprise!</button>
+      <div id="hidden-message" style="display: none;">
+        <h3>I’ll love you forever, Palak! 💖</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Countdown -->
+  <section id="countdown" class="section">
+    <div class="container text-center">
+      <h2>Our First Anniversary 🎉</h2>
+      <div id="countdown-timer" class="fs-4"></div>
+    </div>
+  </section>
+
+  <!-- Background Music -->
+  <div class="music-control">
+    <button id="music-btn" class="btn btn-outline-light">Play Music 🎶</button>
+  </div>
+  <audio id="background-music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sweet.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Bootstrap JS and Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+    // Smooth scroll to section
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Why I Love You - Heart click for new compliments
+    const compliments = [
+      "Your texts brighten my day.",
+      "Your voice notes are my favorite sound.",
+      "Your online hugs feel so real."
+    ];
+    let complimentIndex = 0;
+    document.querySelectorAll('.heart-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cardText = btn.parentElement.querySelector('.card-text');
+        cardText.textContent = compliments[complimentIndex % compliments.length];
+        complimentIndex++;
+      });
+    });
+
+    // Typing effect for love letter
+    const letter = document.getElementById('love-letter');
+    const letterText = letter.textContent;
+    letter.textContent = '';
+    let i = 0;
+    function typeLetter() {
+      if (i < letterText.length) {
+        letter.textContent += letterText.charAt(i);
+        i++;
+        setTimeout(typeLetter, 60); // Faster typing for better visibility
+      } else {
+        letter.style.borderRight = 'none'; // Remove cursor after typing
+      }
+    }
+    window.addEventListener('scroll', () => {
+      if (isInViewport(letter) && i === 0) {
+        typeLetter();
+      }
+    });
+
+    // Check if element is in viewport (50% visibility trigger)
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      return rect.top <= windowHeight * 0.5 && rect.bottom >= 0;
+    }
+
+    // Fallback to show full letter if not animated
+    window.addEventListener('load', () => {
+      if (!isInViewport(letter) && i === 0) {
+        letter.textContent = letterText; // Show full text if JS fails or not in view
+      }
+    });
+
+    // Reveal surprise on button tap
+    function revealSurprise() {
+      const hiddenMessage = document.getElementById('hidden-message');
+      hiddenMessage.style.display = 'block';
+      hiddenMessage.classList.add('show');
+      document.querySelector('#surprise .btn').style.display = 'none'; // Hide button after tap
+    }
+
+    // Countdown timer to March 14, 2026
+    const anniversaryDate = new Date('2026-03-14T00:00:00');
+    function updateCountdown() {
+      const now = new Date();
+      const timeDiff = anniversaryDate - now;
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+      document.getElementById('countdown-timer').textContent = 
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+    setInterval(updateCountdown, 1000);
+
+    // Background music control
+    const music = document.getElementById('background-music');
+    const musicBtn = document.getElementById('music-btn');
+    musicBtn.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        musicBtn.textContent = 'Pause Music 🎶';
+      } else {
+        music.pause();
+        musicBtn.textContent = 'Play Music 🎶';
+      }
+    });
+  </script>
+</body>
+</html>
